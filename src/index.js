@@ -56,6 +56,7 @@ class Game extends React.Component {
     };
   }
 
+    //jumpTo kinda like a vanilla state
   jumpTo(step) {
     this.setState({
       stepNumber: step,
@@ -87,6 +88,7 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
+        //the following: if there is a move, show move # button. either way, show reset button 
       const desc = move ?
       'Go to move #' + move :
       <button className="reset" onClick= {() => this.jumpTo(move)}> Reset </button>;
@@ -101,7 +103,7 @@ class Game extends React.Component {
 
 
     let status;
-    if (winner && winner!== 'Tie') {
+    if (winner && winner!== 'Tie') { 
       status = 'Winner: ' + winner;
     } else if (winner && winner === 'Tie'){
       status = 'Tie';
@@ -127,7 +129,7 @@ class Game extends React.Component {
 }
 
 function calculateWinner(squares) {
-  const lines = [
+  const lines = [ //rows, columns, and diagonals
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -143,7 +145,7 @@ function calculateWinner(squares) {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }
-    else if (!squares.includes(null)){
+    else if (!squares.includes(null)){ //ie if squares are NOT empty, but no winner either
       return 'Tie';
     } 
   }
